@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logo from '../assets/images/interact_logo.jpg';
 
 const Header = () => {
-  const [scroll, setScroll] = useState<boolean>(false);
-
   return (
     <div
       className={`fixed top-0 left-0 right-0 bg-white flex items-center justify-between px-5 py-2 z-50`}
