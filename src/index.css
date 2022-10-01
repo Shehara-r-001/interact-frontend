@@ -10,3 +10,9 @@
     @apply m-0 scrollbar-hide;
   }
 }
+
+@layer components {
+  .input_field {
+    @apply bg-[#e6e6e6] w-full rounded-sm py-1 px-2 text-black text-sm outline-none mt-2;
+  }
+}
