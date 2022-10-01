@@ -26,13 +26,15 @@ const Header = () => {
             SignIn
           </h1>
         </Link>
-        <h1
-          className={`px-2 py-0.5 bg-black text-white rounded-sm hover:bg-white hover:text-black transition-all duration-200 cursor-pointer hover:outline ${
-            hideSignBtn && 'hidden'
-          }`}
-        >
-          SignUp
-        </h1>
+        <Link to='/signup'>
+          <h1
+            className={`px-2 py-0.5 bg-black text-white rounded-sm hover:bg-white hover:text-black transition-all duration-200 cursor-pointer hover:outline ${
+              hideSignBtn && 'hidden'
+            }`}
+          >
+            SignUp
+          </h1>
+        </Link>
       </div>
     </div>
   );

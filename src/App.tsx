@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import LandingPage from './pages/LandingPage';
 import SignIn from './pages/SignIn';
+import { SignUp } from './pages/SignUp';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/signin' element={<SignIn />} />
+      </Routes>
+      <Routes>
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );

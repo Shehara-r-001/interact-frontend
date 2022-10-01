@@ -15,4 +15,8 @@
   .input_field {
     @apply bg-[#e6e6e6] w-full rounded-sm py-1 px-2 text-black text-sm outline-none mt-2;
   }
+
+  .sign_btn {
+    @apply text-sm font-semibold text-white bg-gradient-to-r from-[#ff0066] to-[#ff4d94] py-0.5 px-2 mx-auto mt-5 rounded-sm hover:from-[#ff4d94] hover:to-[#ff0066];
+  }
 }
