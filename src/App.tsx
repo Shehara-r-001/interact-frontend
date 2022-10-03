@@ -11,11 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-      </Routes>
-      <Routes>
         <Route path='/signin' element={<SignIn />} />
-      </Routes>
-      <Routes>
         <Route path='/signup' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
