@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
+import Dropdown from '../components/Dropdown';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { setRole } from '../redux/dropdownSlice';
 
 type Inputs = {
   email: string;
@@ -17,13 +21,22 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const [dropdown, setDropdown] = useState<boolean>(false);
+  const role = useAppSelector((state) => state.role.value);
+  const dispatch = useAppDispatch();
+
   const signUpFunction: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+    // send the role too
 
     setValue('email', '');
     setValue('password', '');
-    // setValue('confirmPassword', '');
+    dispatch(setRole(''));
   };
+
+  useEffect(() => {
+    setDropdown(true);
+  }, [role]);
 
   return (
     <div className='flex items-center justify-center h-screen w-full'>
@@ -63,12 +76,29 @@ export const SignUp = () => {
               *password should be longer than 6 characters
             </p>
           )}
-          {/* <input
-            type='text'
-            placeholder='Confirm the Password..'
-            className='input_field mb-2'
-            {...register('confirmPassword', { required: true })}
-          /> */}
+
+          <div className='flex items-center justify-between mt-2 font-semibold relative'>
+            <p className='text-sm py-0.5'>I would like to</p>
+            <p className='bg-[#e6e6e6] px-4 text-sm py-1 rounded-sm'>
+              {role}{' '}
+              {dropdown ? (
+                <BiChevronDown
+                  className='inline h-5 w-5 cursor-pointer'
+                  onClick={() => setDropdown(!dropdown)}
+                />
+              ) : (
+                <BiChevronUp
+                  className='inline h-5 w-5 cursor-pointer'
+                  onClick={() => setDropdown(!dropdown)}
+                />
+              )}
+            </p>
+            {!dropdown && (
+              <div className='absolute right-0 top-8'>
+                <Dropdown />
+              </div>
+            )}
+          </div>
 
           <button className='sign_btn'>SIGNUP</button>
           <p className='text-xs mt-4 px-1'>
