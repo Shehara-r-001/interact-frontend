@@ -19,4 +19,8 @@
   .sign_btn {
     @apply text-sm font-semibold text-white bg-gradient-to-r from-[#ff0066] to-[#ff4d94] py-0.5 px-2 mx-auto mt-5 rounded-sm hover:from-[#ff4d94] hover:to-[#ff0066];
   }
+
+  .form_error {
+    @apply text-xs text-red-600 px-2;
+  }
 }
