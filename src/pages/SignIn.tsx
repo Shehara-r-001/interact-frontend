@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
   email: string;
@@ -18,6 +19,7 @@ const SignIn = () => {
   } = useForm<Inputs>();
 
   const [error, setError] = useState<string>();
+  const navigate = useNavigate();
 
   const loginFunction: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
@@ -28,8 +30,10 @@ const SignIn = () => {
         password,
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
+        localStorage.setItem('userEmail', data.email);
         setError('');
+        navigate('/home');
       })
       .catch((error) => {
         setError(error.response.data.error);

@@ -5,6 +5,8 @@ import { BiChevronDown, BiChevronUp } from 'react-icons/bi';
 import Dropdown from '../components/Dropdown';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setRole } from '../redux/dropdownSlice';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
   email: string;
@@ -24,14 +26,30 @@ export const SignUp = () => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const role = useAppSelector((state) => state.role.value);
   const dispatch = useAppDispatch();
+  const [error, setError] = useState<string>();
+  const navigate = useNavigate();
 
-  const signUpFunction: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // send the role too
+  const signUpFunction: SubmitHandler<Inputs> = async (data) => {
+    const { email, password } = data;
 
-    setValue('email', '');
-    setValue('password', '');
-    dispatch(setRole(''));
+    await axios
+      .post('http://localhost:3333/api/user/signup', {
+        email,
+        password,
+        role,
+      })
+      .then(({ data }) => {
+        // console.log(data);
+        localStorage.setItem('userEmail', data.email);
+        setError('');
+        navigate('/home');
+      })
+      .catch((error) => setError(error.response.data.error))
+      .finally(() => {
+        setValue('email', '');
+        setValue('password', '');
+        dispatch(setRole(''));
+      });
   };
 
   useEffect(() => {
@@ -99,6 +117,8 @@ export const SignUp = () => {
               </div>
             )}
           </div>
+
+          {error && <p className='form_error'>{error}</p>}
 
           <button className='sign_btn'>SIGNUP</button>
           <p className='text-xs mt-4 px-1'>
