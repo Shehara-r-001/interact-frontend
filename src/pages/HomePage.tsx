@@ -6,7 +6,7 @@ const HomePage = () => {
   const verifiedUser = useVerifyUser();
 
   const { data, isLoading, isError } = verifiedUser;
-  // console.log(data?.data.user);
+  console.log(data?.data.user);
 
   return (
     <div className='mt-[100px]'>

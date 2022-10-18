@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/interact_logo.jpg';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
   const signUrl = useLocation().pathname.split('/')[1];
+  const queryClient = useQueryClient();
+  const userData = queryClient.getQueryData(['verifiedUser']) as any;
+  console.log('header --> ', userData.data.user);
 
   useEffect(() => {
     if (signUrl === 'signin' || signUrl === 'signup') setHideSignBtn(true);
