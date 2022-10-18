@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 type Inputs = {
   email: string;
   password: string;
-  // confirmPassword: string;
 };
 
 export const SignUp = () => {
@@ -40,7 +39,9 @@ export const SignUp = () => {
       })
       .then(({ data }) => {
         // console.log(data);
-        localStorage.setItem('userEmail', data.email);
+
+        localStorage.setItem('userToken', data.token);
+
         setError('');
         navigate('/home');
       })

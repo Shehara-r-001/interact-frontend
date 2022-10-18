@@ -31,7 +31,7 @@ const SignIn = () => {
       })
       .then(({ data }) => {
         // console.log(data);
-        localStorage.setItem('userEmail', data.email);
+        localStorage.setItem('userToken', data.token);
         setError('');
         navigate('/home');
       })
