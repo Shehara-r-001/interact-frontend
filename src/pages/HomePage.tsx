@@ -1,22 +1,16 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { useVerifyUser } from '../hooks/useVerifyUser';
 
 const HomePage = () => {
-  const token: string | null = localStorage.getItem('userToken');
+  const verifiedUser = useVerifyUser();
 
-  axios.defaults.headers.common['auth_token'] = `Bearer ${token}`;
-
-  const { data, isLoading, isError } = useQuery(
-    ['verifiedUser'],
-    async () =>
-      await axios
-        .get('http://localhost:3333/api/user/verify')
-        .then((res) => res.data)
-  );
+  const { data, isLoading, isError } = verifiedUser;
+  // console.log(data?.data.user);
 
   return (
     <div className='mt-[100px]'>
-      {isLoading ? 'Loading' : isError ? 'error' : data.user.email}
+      {isLoading ? 'Loading' : isError ? 'error' : data?.data.user.email}
     </div>
   );
 };
