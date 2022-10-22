@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Logo from '../assets/images/interact_logo.jpg';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { useVerifyUser } from '../hooks/useVerifyUser';
-import { setLoggedInUser, setLoggedOutUser } from '../redux/userSlice';
+import Logo from '../../assets/images/interact_logo.jpg';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useVerifyUser } from '../../hooks/useVerifyUser';
+import { setLoggedInUser, setLoggedOutUser } from '../../redux/userSlice';
 import Notification from './Notification';
-import SignNav from './SignNav';
-import SpinnerW from './Loaders/SpinnerW';
+import SignNav from '../SignNav';
+import SpinnerW from '../Loaders/SpinnerW';
 
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
@@ -43,7 +43,7 @@ const Header = () => {
     >
       <img src={Logo} alt='interact-logo' className='w-[150px] h-[50px]' />
       {data && userState ? (
-        <Notification />
+        <Notification email={userState} />
       ) : !isLoading && !userState ? (
         <SignNav hideSignBtn={hideSignBtn} />
       ) : (
