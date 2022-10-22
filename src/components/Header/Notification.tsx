@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchUser } from '../../hooks/useFetchUser';
 import SpinnerW from '../Loaders/SpinnerW';
 import Avatar from './Avatar';
+import { BiCaretDown } from 'react-icons/bi';
+import Dropdown from './Dropdown';
 
 type Props = {
   email: string;
@@ -12,6 +14,7 @@ const placeholder =
 
 const Notification = ({ email }: Props) => {
   const userData = useFetchUser(email);
+  const [expand, setExpand] = useState<boolean>(false);
 
   const { data, isLoading, isError } = userData;
 
@@ -27,8 +30,15 @@ const Notification = ({ email }: Props) => {
   const { image, name } = data.data.user;
 
   return (
-    <div>
+    <div className='flex items-center space-x-2 relative'>
       {image ? <Avatar image={image} /> : <Avatar image={placeholder} />}
+      <BiCaretDown
+        className={`h-5 w-5 text-[#666666] ${
+          expand && 'rotate-180'
+        } duration-200 cursor-pointer`}
+        onClick={() => setExpand(!expand)}
+      />
+      {expand && <Dropdown email={email} name={name} />}
     </div>
   );
 };
