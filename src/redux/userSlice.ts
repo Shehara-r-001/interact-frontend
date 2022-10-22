@@ -25,7 +25,7 @@ export const userSlice = createSlice({
       state.value.email = action.payload.email;
       state.value.role = action.payload.role;
     },
-    setLoggedOutUser: (state: UserState, action: PayloadAction<UDetails>) => {
+    setLoggedOutUser: (state: UserState) => {
       state.value.email = '';
       state.value.role = '';
     },

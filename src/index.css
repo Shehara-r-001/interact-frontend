@@ -23,4 +23,8 @@
   .form_error {
     @apply text-xs text-red-600 px-2;
   }
+
+  .loader {
+    @apply -mt-[20px];
+  }
 }

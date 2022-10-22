@@ -3,9 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/interact_logo.jpg';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { useVerifyUser } from '../hooks/useVerifyUser';
-import { setLoggedInUser } from '../redux/userSlice';
+import { setLoggedInUser, setLoggedOutUser } from '../redux/userSlice';
 import Notification from './Notification';
 import SignNav from './SignNav';
+import SpinnerW from './Loaders/SpinnerW';
 
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
@@ -24,6 +25,8 @@ const Header = () => {
           role: data.data.user.role,
         })
       );
+
+    if (isError) dispatch(setLoggedOutUser());
   }, [verifiedUser]);
 
   const userState = useAppSelector(({ user }) => user.value.email);
@@ -39,7 +42,13 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 bg-white flex items-center justify-between px-5 py-2 z-50`}
     >
       <img src={Logo} alt='interact-logo' className='w-[150px] h-[50px]' />
-      {userState ? <Notification /> : <SignNav hideSignBtn={hideSignBtn} />}
+      {data && userState ? (
+        <Notification />
+      ) : !isLoading && !userState ? (
+        <SignNav hideSignBtn={hideSignBtn} />
+      ) : (
+        <SpinnerW />
+      )}
     </div>
   );
 };
