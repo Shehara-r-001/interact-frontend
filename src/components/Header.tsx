@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/interact_logo.jpg';
-import { useQueryClient } from '@tanstack/react-query';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useVerifyUser } from '../hooks/useVerifyUser';
+import { setLoggedInUser } from '../redux/userSlice';
+import Notification from './Notification';
+import SignNav from './SignNav';
 
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
   const signUrl = useLocation().pathname.split('/')[1];
-  const queryClient = useQueryClient();
-  const userData = queryClient.getQueryData(['verifiedUser']) as any;
-  console.log('header --> ', userData.data.user);
+
+  const verifiedUser = useVerifyUser();
+  const dispatch = useAppDispatch();
+
+  const { data, isLoading, isError } = verifiedUser;
+
+  useEffect(() => {
+    if (data)
+      dispatch(
+        setLoggedInUser({
+          email: data.data.user.email,
+          role: data.data.user.role,
+        })
+      );
+  }, [verifiedUser]);
+
+  const userState = useAppSelector(({ user }) => user.value.email);
+  // console.log(userState);
 
   useEffect(() => {
     if (signUrl === 'signin' || signUrl === 'signup') setHideSignBtn(true);
@@ -20,26 +39,7 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 bg-white flex items-center justify-between px-5 py-2 z-50`}
     >
       <img src={Logo} alt='interact-logo' className='w-[150px] h-[50px]' />
-      <div className='flex items-center space-x-3 text-sm font-semibold'>
-        <Link to='/signin'>
-          <h1
-            className={`px-2 py-0.5 hover:bg-black hover:text-white rounded-sm transition-all duration-200 cursor-pointer ${
-              hideSignBtn && 'hidden'
-            }`}
-          >
-            SignIn
-          </h1>
-        </Link>
-        <Link to='/signup'>
-          <h1
-            className={`px-2 py-0.5 bg-black text-white rounded-sm hover:bg-white hover:text-black transition-all duration-200 cursor-pointer hover:outline ${
-              hideSignBtn && 'hidden'
-            }`}
-          >
-            SignUp
-          </h1>
-        </Link>
-      </div>
+      {userState ? <Notification /> : <SignNav hideSignBtn={hideSignBtn} />}
     </div>
   );
 };

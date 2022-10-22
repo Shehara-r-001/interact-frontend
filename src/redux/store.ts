@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import dropdownReducer from './dropdownSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
     role: dropdownReducer,
+    user: userReducer,
   },
 });
 

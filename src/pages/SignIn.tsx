@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
+import { useAppSelector } from '../redux/hooks';
 
 type Inputs = {
   email: string;
@@ -10,10 +12,14 @@ type Inputs = {
 };
 
 const SignIn = () => {
+  const userState = useAppSelector((state) => state.user.value.email);
+  if (userState) {
+    redirect('/home');
+  }
+
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm<Inputs>();
