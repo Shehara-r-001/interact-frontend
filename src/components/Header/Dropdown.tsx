@@ -20,7 +20,7 @@ const Dropdown = ({ email, name }: Props) => {
     if (token) localStorage.removeItem('userToken');
   };
   return (
-    <div className='absolute bg-[#f9f9f9] top-10 right-1 text-sm w-[120px] rounded-sm p-1 px-2 space-y-1 shadow-sm'>
+    <div className='absolute bg-[#f9f9f9] top-10 right-1 text-sm w-[120px] rounded-sm p-1 px-2 space-y-1 shadow-md'>
       {name ? (
         <p className='text-xs dropdown_effect'>
           Logged in as <span className='text-sm font-semibold'>{name}</span>
