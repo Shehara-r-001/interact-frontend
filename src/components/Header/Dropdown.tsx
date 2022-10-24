@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { setLoggedOutUser } from '../../redux/userSlice';
 
@@ -15,7 +15,7 @@ const Dropdown = ({ email, name }: Props) => {
   const logoutHandler = () => {
     dispatch(setLoggedOutUser());
     navigate('/signin', { replace: true });
-    navigate(0);
+    // navigate(0);
     const token = localStorage.getItem('userToken');
     if (token) localStorage.removeItem('userToken');
   };

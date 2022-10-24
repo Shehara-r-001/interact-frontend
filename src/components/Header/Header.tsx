@@ -11,7 +11,6 @@ import SpinnerW from '../Loaders/SpinnerW';
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
   const signUrl = useLocation().pathname.split('/')[1];
-  const location = useLocation();
 
   const verifiedUser = useVerifyUser();
   const dispatch = useAppDispatch();
@@ -34,7 +33,7 @@ const Header = () => {
       );
 
     if (isError) dispatch(setLoggedOutUser());
-  }, [verifiedUser]);
+  }, [data, isError, dispatch]);
 
   useEffect(() => {
     if (signUrl === 'signin' || signUrl === 'signup') setHideSignBtn(true);
