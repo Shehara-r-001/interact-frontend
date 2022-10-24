@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../../assets/images/interact_logo.jpg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useVerifyUser } from '../../hooks/useVerifyUser';
@@ -11,12 +11,19 @@ import SpinnerW from '../Loaders/SpinnerW';
 const Header = () => {
   const [hideSignBtn, setHideSignBtn] = useState<boolean>(false);
   const signUrl = useLocation().pathname.split('/')[1];
+  const location = useLocation();
 
   const verifiedUser = useVerifyUser();
   const dispatch = useAppDispatch();
 
+  const userState = useAppSelector(({ user }) => user.value.email);
+  console.log(userState);
+
   const { data, isLoading, isError } = verifiedUser;
 
+  // ! need a refresh?
+  // ! okay to use reactQuery here?
+  // * execute after mounting the header, thats why this happens
   useEffect(() => {
     if (data)
       dispatch(
@@ -28,9 +35,6 @@ const Header = () => {
 
     if (isError) dispatch(setLoggedOutUser());
   }, [verifiedUser]);
-
-  const userState = useAppSelector(({ user }) => user.value.email);
-  // console.log(userState);
 
   useEffect(() => {
     if (signUrl === 'signin' || signUrl === 'signup') setHideSignBtn(true);

@@ -16,11 +16,11 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route
           path='/signin'
-          element={userState ? <Navigate to='/home' /> : <SignIn />}
+          element={userState.length ? <Navigate to='/home' /> : <SignIn />}
         />
         <Route
           path='/signup'
-          element={userState ? <Navigate to='/home' /> : <SignUp />}
+          element={userState.length ? <Navigate to='/home' /> : <SignUp />}
         />
         <Route path='/home' element={<HomePage />} />
       </Routes>

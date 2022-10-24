@@ -27,4 +27,8 @@
   .loader {
     @apply -mt-[20px];
   }
+
+  .dropdown_effect {
+    @apply hover:border-l-2 border-purple-500 transition-all duration-100 cursor-pointer hover:pl-1;
+  }
 }
