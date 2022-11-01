@@ -5,7 +5,7 @@ import Categories from './Categories';
 const Filter = () => {
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div className='bg-white rounded-sm w-[140px] h-[30px] text-sm p-1 px-2 mt-[10px] ml-4 shadow-sm flex justify-between items-center relative'>
+    <div className='bg-white rounded-sm w-[140px] h-[30px] text-sm p-1 px-2 mt-[10px] ml-4 lg:ml-[100px] sm:ml-10 shadow-sm flex justify-between items-center relative'>
       <h1 className='text-[#595959]'>Category</h1>
       <BiCaretDown
         className={`h-5 w-5 cursor-pointer text-[#595959] hover:text-black duration-150 ${

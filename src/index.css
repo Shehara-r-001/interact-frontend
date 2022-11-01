@@ -31,4 +31,8 @@
   .dropdown_effect {
     @apply hover:border-l-2 border-purple-500 transition-all duration-100 cursor-pointer hover:pl-1;
   }
+
+  .ddItem {
+    @apply text-[#595959] hover:text-black;
+  }
 }
