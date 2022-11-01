@@ -45,7 +45,7 @@ const Notification = ({ email }: Props) => {
       </div>
       {image ? <Avatar image={image} /> : <Avatar image={placeholder} />}
       <BiCaretDown
-        className={`h-5 w-5 text-[#666666] ${
+        className={`h-5 w-5 text-[#666666] hover:text-black ${
           expand && 'rotate-180'
         } duration-200 cursor-pointer`}
         onClick={() => setExpand(!expand)}

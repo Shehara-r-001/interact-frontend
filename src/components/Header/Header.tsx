@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 bg-white flex items-center justify-between px-5 py-2 z-50`}
+      className={`fixed shadow-sm top-0 left-0 right-0 bg-white flex items-center justify-between px-5 py-2 z-50`}
     >
       <img src={Logo} alt='interact-logo' className='w-[150px] h-[50px]' />
       {data && userState ? (
