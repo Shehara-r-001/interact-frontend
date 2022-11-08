@@ -1,11 +1,16 @@
-const Categories = () => {
+type Props = {
+  data: ICategory[];
+};
+
+const Categories = ({ data }: Props) => {
   return (
     <div className={` bg-white  w-[140px] p-1 px-2 text-sm`}>
       <ul className='space-y-1'>
-        <li className='ddItem dropdown_effect border-pink-500'>Cakes</li>
-        <li className='ddItem dropdown_effect border-pink-500'>Crafts</li>
-        <li className='ddItem dropdown_effect border-pink-500'>Decorations</li>
-        <li className='ddItem dropdown_effect border-pink-500'>Clothing</li>
+        {data.map((cat) => (
+          <li key={cat.id} className='ddItem dropdown_effect border-pink-500'>
+            {cat.name}
+          </li>
+        ))}
       </ul>
     </div>
   );

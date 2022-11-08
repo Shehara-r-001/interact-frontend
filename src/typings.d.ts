@@ -7,3 +7,8 @@ interface IUser {
   createdAt: string;
   bio: string | null;
 }
+
+interface ICategory {
+  id: string;
+  name: string;
+}

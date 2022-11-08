@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import { BiCaretDown } from 'react-icons/bi';
+import { useFetchCategories } from '../../hooks/useFetchCategories';
+import SpinnerW from '../Loaders/SpinnerW';
 import Categories from './Categories';
 
 const Filter = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [categories, setCategories] = useState<any>();
+  const getCategories = useFetchCategories();
+
+  const { data, isLoading, isError } = getCategories;
+
   return (
     <div className='bg-white rounded-sm w-[140px] h-[30px] text-sm p-1 px-2 mt-[10px] ml-4 lg:ml-[100px] sm:ml-10 shadow-sm flex justify-between items-center relative'>
       <h1 className='text-[#595959]'>Category</h1>
@@ -20,7 +27,14 @@ const Filter = () => {
           'top-[40px] left-0 w-[140px] h-[150px] z-0 overflow-visible opacity-100'
         }`}
       >
-        <Categories />
+        {isLoading ? (
+          <SpinnerW />
+        ) : isError ? (
+          <h1>error</h1>
+        ) : (
+          <Categories data={data.data.categories} />
+        )}
+        {/* <Categories /> */}
       </div>
     </div>
   );
